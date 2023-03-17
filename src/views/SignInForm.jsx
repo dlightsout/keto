@@ -1,16 +1,16 @@
 const React = require('react');
 const Layout = require('./Layout');
 
-function SignInForm({ username, name }) {
+function SignInForm({ username}) {
   //JS Code
 
   return (
     <Layout username={username}>
       <>
-        <h2>Вход на сайт</h2>
+        <h2>Sign in </h2>
         <form id="signinForm" method="POST" action="/auth/signin">
           <div className="form-group">
-            <label htmlFor="username">Логин:</label>
+            <label htmlFor="username">Login</label>
             <input
               id="username"
               className="form-control"
@@ -20,7 +20,7 @@ function SignInForm({ username, name }) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Пароль:</label>
+            <label htmlFor="password">Password</label>
             <input
               id="password"
               className="form-control"
@@ -30,7 +30,7 @@ function SignInForm({ username, name }) {
             />
           </div>
           <button type="submit" className="btn btn-primary">
-            Войти
+            Click to enter
           </button>
         </form>
         <script src="/js/signin.js" />

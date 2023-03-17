@@ -2,11 +2,10 @@ const signinForm = document.forms.signinForm;
 
 signinForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
-  const { method, action } = event.target;
   let response;
   try {
-    response = await fetch(action, {
-      method,
+    response = await fetch('/auth/signin', {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -17,7 +16,7 @@ signinForm?.addEventListener('submit', async (event) => {
     });
     if (response.status !== 200) {
       const data = await response.json();
-      console.log('response ststus code', response.status);
+      console.log('response status code', response.status);
       return failSignin(event.target, data.err);
     }
   } catch (err) {

@@ -1,12 +1,14 @@
 const express = require('express');
+const cors = require('cors')
 const session = require('express-session'); // библиотека для работы с сессиями// cookie-parser уже включен в express-session
 const path = require('path');
 const morgan = require('morgan');
 require('dotenv').config(); // подключаем чтение из файла .env
 require('@babel/register');
 const FileStore = require('session-file-store')(session);
-
+const fetch = require('node-fetch');
 const dbConnect = require('./db/dbconnect');
+
 
 // импорт роутов
 const indexRouter = require('./routes/index');
@@ -21,10 +23,13 @@ const app = express();
 
 dbConnect();
 
+app.use(cors());
 app.use(express.static(path.resolve('public')));
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+
 
 const sessionConfig = {
   name: 'sid', // название куки

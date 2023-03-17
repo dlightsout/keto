@@ -1,11 +1,11 @@
 const express = require('express');
-const {isValid} = require("../middlewares/functs");
+const { isValid } = require("../middlewares/functs");
 
 const {
   checkUserAndCreateSession,
   createUserAndSession, destroySession,
   renderSignInForm,
-  renderSignUpForm
+  renderSignUpForm,
 } = require("../controllers/authControllers");
 
 const router = express.Router();
@@ -13,7 +13,7 @@ const router = express.Router();
 router
   .route('/signup')
   .get(renderSignUpForm) // Страница регистрации пользователя
-  .post(isValid,  createUserAndSession); // Регистрация пользователя
+  .post(isValid, createUserAndSession); // Регистрация пользователя
 
 router
   .route('/signin')

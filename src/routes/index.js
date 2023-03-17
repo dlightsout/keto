@@ -1,8 +1,12 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 
 const { indexPage } = require('../controllers/indexController');
+const { addCoinToDb, deleteCoin } = require('../controllers/table');
 
-router.get('/', indexPage);
+router
+  .route('/')
+  .get(indexPage)
+  .post(addCoinToDb)
+  .delete(deleteCoin)
 
 module.exports = router;

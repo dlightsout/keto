@@ -7,41 +7,32 @@ function Layout({ children, title =  'Auth', username }) {
         <meta charSet="UTF-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
         <title>{title}</title>
-        <link
-          rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-          crossOrigin="anonymous"
-        />
         <link rel="stylesheet" href="/styles/style.css" />
-        {/*<script defer src="/js/application.js"></script>*/}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" 
+        crossOrigin="anonymous" />
       </head>
-      <body>
+      <body background="..\">
         <div className="container">
           <nav className="navbar navbar-expand-sm bg-light">
             <ul className="navbar-nav">
               <li className="nav-item">
                 <a className="nav-link" href="/">
-                  Главная
+                  Main page
                 </a>
               </li>
               {username ? (
                 <>
                   <li className="nav-item">
                     <a className="nav-link" href="/private">
-                      Приватная страница
+                      Dashboard
                     </a>
                   </li>
                   <li className="nav-item">
                     <a className="nav-link" href="/auth/signout">
-                      Выйти
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="#">
-                      Привет, { username }
+                      Sign out
                     </a>
                   </li>
                 </>
@@ -49,12 +40,12 @@ function Layout({ children, title =  'Auth', username }) {
                 <>
                   <li className="nav-item">
                     <a className="nav-link" href="/auth/signin">
-                      Войти
+                      Sign in
                     </a>
                   </li>
                   <li className="nav-item">
                     <a className="nav-link" href="/auth/signup">
-                      Регистрация
+                      Sign up
                     </a>
                   </li>
                 </>
@@ -63,6 +54,7 @@ function Layout({ children, title =  'Auth', username }) {
           </nav>
           {children}
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous" />
       </body>
     </html>
   );

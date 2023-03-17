@@ -7,10 +7,10 @@ function Index({ username }) {
   return (
     <Layout username={username}>
       <>
-        <h2>Регистрация</h2>
-        <form id="signupForm" method="POST" action="/auth/signup">
+        <h2>Sign up</h2>
+        <form id="signupForm">
           <div className="form-group">
-            <label htmlFor="username">Логин:</label>
+            <label htmlFor="username">Login:</label>
             <input
               id="username"
               className="form-control"
@@ -34,7 +34,19 @@ function Index({ username }) {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Пароль:</label>
+            <label htmlFor="nubmer">Phone number:</label>
+            <input
+              id="phone"
+              className="form-control"
+              name="phone"
+              type="text"
+              pattern="^[0-9]\w+"
+              required
+              minLength={8}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password:</label>
             <input
               id="password"
               className="form-control"
@@ -45,7 +57,7 @@ function Index({ username }) {
             />
           </div>
           <button type="submit" className="btn btn-primary">
-            Зарегистрироваться
+            Sign up 
           </button>
         </form>
         <script src='/js/signup.js'/>

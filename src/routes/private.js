@@ -1,15 +1,16 @@
-const {privatePage} = require("../controllers/privatePageController");
+const { privatePage } = require("../controllers/privatePageController");
 
 const express = require('express');
 const router = express.Router();
 
-// const { isAuth } = require('../middlewares/functs.js');
+const { isAuth } = require('../middlewares/functs');
+const {deleteCoin} = require('../controllers/table');
+const { updateNotifPrice } = require('../controllers/privatePageController');
 
-function isAuth(req, res, next) {
-  if (req.session?.user) next();
-  else res.redirect('/auth/signin');
-}
-
-router.get('/', isAuth, privatePage);
+router
+  .route('/')
+  .get(isAuth, privatePage)
+  .patch(isAuth, updateNotifPrice)
+  .delete(isAuth, deleteCoin)
 
 module.exports = router;

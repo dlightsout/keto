@@ -8,7 +8,7 @@ function Error({username}) {
   return (
     <Layout username={username}>
       <div className="alert alert-danger" role="alert">
-        Произошла непредвиденная ошибка.
+        Seems like it was an error 
       </div>
     </Layout>
   );

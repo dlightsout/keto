@@ -6,7 +6,7 @@ function NotFound({username}) {
 
   return (
     <Layout username={username}>
-      <p className="lead">Страница не найдена - 404</p>
+      <p className="lead">YOYO, page not found - 404</p>
     </Layout>
   );
 }

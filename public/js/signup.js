@@ -1,12 +1,11 @@
-const signupForm = document.forms.signupForm;
+const { signupForm }= document.forms;
 
 signupForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
-  const { method, action } = event.target;
   let response;
   try {
-    response = await fetch(action, {
-      method,
+    response = await fetch('/auth/signup', {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -14,6 +13,7 @@ signupForm?.addEventListener('submit', async (event) => {
         name: event.target.name.value,
         email: event.target.email.value,
         password: event.target.password.value,
+        phone: event.target.phone.value,
       }),
     });
     if (response.status !== 200) {
@@ -31,7 +31,6 @@ signupForm?.addEventListener('submit', async (event) => {
 
 // Очищаем кастомные сообщения об ошибках при новом вводе
 signupForm?.addEventListener('input', (event) => {
-
   event.target.setCustomValidity('');
   event.target.checkValidity();
 });

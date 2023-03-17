@@ -1,5 +1,7 @@
 'use strict';
-const { Model } = require('sequelize');
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -8,25 +10,23 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      this.hasMany(models.Favorite, {foreignKey: 'userId'} )
+    }
+
+    static async isUserUnique(email) {
+      const checkByEmail = await this.findOne({ where: { email: email } });
+      if (checkByEmail === null) return true;
+      return false;
     }
   }
-  User.init(
-    {
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      password: { type: DataTypes.STRING },
-      email: {
-        type: DataTypes.STRING,
-      },
-    },
-    {
-      sequelize,
-      modelName: 'User',
-    }
-  );
+  User.init({
+    name: DataTypes.STRING,
+    password: DataTypes.STRING,
+    email: DataTypes.STRING,
+    phone: DataTypes.INTEGER,
+  }, {
+    sequelize,
+    modelName: 'User',
+  });
   return User;
 };

@@ -12,8 +12,11 @@ const SignUpForm = require('../views/SignUpForm');
 const failAuth = (res, err) => res.status(401).json({err: err});
 
 exports.createUserAndSession = async (req, res, next) => {
-  const {name, password, email} = req.body;
-  console.log('req.body: ', req.body);
+  const { name, password, email, phone } = req.body;
+  const checkUnique = await User.isUserUnique(email);
+  if (!checkUnique) {
+    res.json({error: 'User exists, use another email '})
+  }
   try {
     // Мы не храним пароль в БД, только его хэш
     const saltRounds = 10;
@@ -23,6 +26,7 @@ exports.createUserAndSession = async (req, res, next) => {
       name,
       password: hashedPassword,
       email,
+      phone,
     });
 
     // записываем в req.session.user данные (id & name) (создаем сессию)
@@ -31,7 +35,7 @@ exports.createUserAndSession = async (req, res, next) => {
     res.status(200).end(); // ответ 200 + автоматическое создание и отправка cookies в заголовке клиенту
   } catch (err) {
     let errMsg = err.message;
-    if(err.name==='SequelizeUniqueConstraintError') errMsg = err.errors[0].message
+    if (err.name === 'SequelizeUniqueConstraintError') errMsg = err.errors[0].message
     console.error('Err message:', err.message);
     console.error('Err code', err.code);
     failAuth(res, errMsg);
@@ -43,7 +47,7 @@ exports.checkUserAndCreateSession = async (req, res, next) => {
   const {name, password} = req.body;
   try {
     // Пытаемся сначала найти пользователя в БД
-    const user = await User.findOne({where: {name: name}, raw: true});
+    const user = await User.findOne({ where: {name: name}, raw: true});
     if (!user) return failAuth(res, ' Неправильное имя/пароль');
 
     // Сравниваем хэш в БД с хэшем введённого пароля
@@ -72,4 +76,3 @@ exports.renderSignInForm = (req, res) =>
 
 exports.renderSignUpForm = (req, res) =>
   render(SignUpForm, { username: req.session?.user?.name }, res);
-
